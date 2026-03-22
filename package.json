@@ -1,0 +1,8 @@
+{
+	"name": "univer-helm-charts",
+	"private": true,
+	"description": "Meta package so Railway Railpack has a defined start; Univer runs via docker-compose/",
+	"scripts": {
+		"start": "node docker-compose/railway-hint.mjs"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"name": "univer-docker-compose",
+	"private": true,
+	"description": "Railpack anchor when Railway root is docker-compose/; stack still needs Compose deploy",
+	"scripts": {
+		"start": "node railway-hint.mjs"
+	}
+}
