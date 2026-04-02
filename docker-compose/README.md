@@ -38,6 +38,18 @@ bash run.sh
 bash run.sh start-demo-ui
 ```
 
+## Veritly univer-gateway (monorepo)
+
+Veritly’s edge gateway lives in `docker-compose/veritly-univer-gateway/` beside this file; the compose service uses `context: ./veritly-univer-gateway`. It joins `univer-prod` and defaults to `UNIVER_UPSTREAM=http://universer:8000`.
+
+After infra + main stack are up (`bash run.sh`), start the gateway and Drizzle Studio:
+
+```bash
+docker compose up -d veritly-univer-gateway veritly-drizzle-studio
+```
+
+From the Veritly monorepo root: `bun run compose:univer-gateway:dev`.
+
 ## Use port
 
 | service   | port  | description              |

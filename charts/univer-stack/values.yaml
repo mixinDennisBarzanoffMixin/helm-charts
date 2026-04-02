@@ -26,7 +26,7 @@ universer:
   fullnameOverride: universer
   replicaCount: 3
   ingress:
-    enabled: true
+    enabled: false
     hosts:
       - host: "univer.example.com"
         paths:
@@ -347,3 +347,4 @@ tags:
 
 univer-ssc:
   enabled: false
+

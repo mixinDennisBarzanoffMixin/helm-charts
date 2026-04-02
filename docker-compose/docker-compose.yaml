@@ -255,7 +255,49 @@ services:
     environment:
       - NO_PROXY=127.0.0.1,localhost,${DOCKER_NETWORK_SUBNET},lb
 
+  veritly-usip:
+    build:
+      context: ./veritly-usip
+      dockerfile: Dockerfile
+    ports:
+      - "${VERITLY_USIP_PORT:-8789}:8080"
+      - "${VERITLY_USIP_INSPECT_PORT:-9229}:9229"
+    environment:
+      PORT: "8080"
+      USIP_APIKEY: ${USIP_APIKEY:-}
+      USIP_DB_PATH: /data/veritly-usip.db
+      USIP_DEFAULT_PROJECT_ID: ${GATEWAY_DEFAULT_PROJECT_ID:-default}
+    volumes:
+      - veritly-usip-data:/data
+      # Editor only: live-open same paths as /app/src. Runtime is /app/dist (rebuild image after TS changes).
+      - ./veritly-usip/src:/app/src:ro
+    networks:
+      - univer
+
+  veritly-usip-drizzle-studio:
+    image: node:22-bookworm-slim
+    working_dir: /workspace
+    ports:
+      - "${VERITLY_USIP_DRIZZLE_PORT:-4984}:4984"
+    environment:
+      USIP_DB_PATH: /data/veritly-usip.db
+    volumes:
+      - ./veritly-usip/drizzle.config.ts:/workspace/drizzle.config.ts:ro
+      - ./veritly-usip/src:/workspace/src:ro
+      - veritly-usip-data:/data
+    command:
+      [
+        "sh",
+        "-euc",
+        "printf '%s\\n' '{\"type\":\"module\",\"private\":true}' > package.json && npm install drizzle-kit@0.30.6 better-sqlite3@11.8.1 drizzle-orm@0.45.1 && exec npx drizzle-kit studio --host 0.0.0.0 --port 4984 --config drizzle.config.ts",
+      ]
+    networks:
+      - univer
+
 networks:
   univer:
     external: true
     name: univer-prod
+
+volumes:
+  veritly-usip-data: {}
