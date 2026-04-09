@@ -5,7 +5,6 @@ cat-logs/
 configs/config.yaml
 configs/LICENSE
 configs/public_key.crt
-exchange/config.yaml
 
 .env.enterprise
 .env.custom
