@@ -5,6 +5,8 @@ services:
     image: nginx:alpine-slim
     ports:
       - ${HOST_NGINX_PORT}:8000
+      # Cloudflare "Full" talks HTTPS to origin :443; without this you get 521 and bogus CORS errors in the browser.
+      - "443:443"
     networks:
       - univer
     depends_on:
@@ -12,6 +14,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d/
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
 
   universer:
     restart: always

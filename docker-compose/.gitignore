@@ -11,3 +11,6 @@ exchange/config.yaml
 .env.custom
 
 *.tar.gz
+
+nginx/certs/*.pem
+nginx/certs/*.key
