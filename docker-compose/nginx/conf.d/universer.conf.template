@@ -25,7 +25,10 @@ server {
 
     location @usip_files_cors_preflight {
         internal;
-        add_header Access-Control-Allow-Origin $http_origin always;
+        if ($usip_cors_allow_origin = "") {
+            return 403;
+        }
+        add_header Access-Control-Allow-Origin $usip_cors_allow_origin always;
         add_header Access-Control-Allow-Credentials "true" always;
         add_header Access-Control-Allow-Methods "GET,POST,PUT,PATCH,DELETE,OPTIONS" always;
         add_header Access-Control-Allow-Headers "authorization, content-type, cookie, x-requested-with, accept, origin, access-control-request-method, access-control-request-headers, x-feature-id, x-unit-id" always;
@@ -41,10 +44,12 @@ server {
 
         proxy_hide_header Access-Control-Allow-Origin;
         proxy_hide_header Access-Control-Allow-Credentials;
-        add_header Access-Control-Allow-Origin $http_origin always;
-        add_header Access-Control-Allow-Credentials "true" always;
-        add_header Vary "Origin, Access-Control-Request-Headers" always;
         proxy_pass http://veritly_usip;
+        if ($usip_cors_allow_origin != "") {
+            add_header Access-Control-Allow-Origin $usip_cors_allow_origin always;
+            add_header Access-Control-Allow-Credentials "true" always;
+            add_header Vary "Origin, Access-Control-Request-Headers" always;
+        }
     }
 
     location / {
