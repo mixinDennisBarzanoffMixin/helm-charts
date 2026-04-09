@@ -277,8 +277,6 @@ services:
   veritly-usip-drizzle-studio:
     image: node:22-bookworm-slim
     working_dir: /workspace
-    ports:
-      - "${VERITLY_USIP_DRIZZLE_PORT:-4984}:4984"
     environment:
       USIP_DB_PATH: /data/veritly-usip.db
     volumes:

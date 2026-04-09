@@ -88,8 +88,6 @@ services:
       - MINIO_ROOT_PASSWORD=${S3_PASSWORD}
       - MINIO_DEFAULT_BUCKETS=${S3_DEFAULT_BUCKET}
       - MINIO_DATA_DIR=/data
-    ports:
-      - ${HOST_MINIO_PORT}:9000
     expose:
       - 9000
     networks:
