@@ -1,0 +1,7 @@
+FROM envoyproxy/envoy:v1.31.3
+
+# Replaces compose bind mount:
+# - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml
+COPY envoy/envoy.yaml /etc/envoy/envoy.yaml
+
+EXPOSE 10000
