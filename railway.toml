@@ -1,8 +1,0 @@
-# Root of this repo is not an app — Railpack defaults fail. package.json + start.sh
-# provide a clear error. Prefer Docker Compose import per docs.railway.com/deploy/dockerfiles
-
-[build]
-builder = "RAILPACK"
-
-[deploy]
-startCommand = "npm start"
