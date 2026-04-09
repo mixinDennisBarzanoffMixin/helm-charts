@@ -261,7 +261,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${VERITLY_USIP_PORT:-8789}:8080"
-      - "${VERITLY_USIP_INSPECT_PORT:-9229}:9229"
     environment:
       PORT: "8080"
       USIP_APIKEY: ${USIP_APIKEY:-}
