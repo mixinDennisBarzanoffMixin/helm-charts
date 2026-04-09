@@ -2,10 +2,6 @@ ARG EDITION=release
 ARG UNIVERSER_VERSION=0.18.0
 FROM univer-acr-registry.cn-shenzhen.cr.aliyuncs.com/${EDITION}/universer:${UNIVERSER_VERSION}
 
-# Replaces compose bind mounts:
-# - ./configs:/data/configs
-# - /tmp/univers:/tmp/univers
-# - ./logs/universer:/app/logs
 COPY configs /data/configs
 RUN mkdir -p /tmp/univers /app/logs
 

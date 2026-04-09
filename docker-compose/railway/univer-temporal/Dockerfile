@@ -1,8 +1,6 @@
 ARG TEMPORAL_VERSION=1.23
 FROM temporalio/auto-setup:${TEMPORAL_VERSION}
 
-# Replaces compose bind mount:
-# - ./temporal/dynamicconfig:/etc/temporal/config/dynamicconfig
 COPY temporal/dynamicconfig /etc/temporal/config/dynamicconfig
 
 EXPOSE 7233
